@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 16:25:15 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/10 16:31:17 by cwenz            ###   ########.fr       */
+/*   Created: 2023/08/11 18:19:46 by cwenz             #+#    #+#             */
+/*   Updated: 2023/08/11 18:25:10 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	main()
+void	error_and_exit(t_error_type error_type, char *error_msg)
 {
-	ft_printf("Hello!");
+	ft_printf("Error\n%s\n", error_msg);
+	exit(error_type);
 }

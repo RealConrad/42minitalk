@@ -1,5 +1,9 @@
-# Program name
-minitalk
+# Program names
+server
+client
 
 # Execuable
 a.out
+
+# Object files
+*.o
