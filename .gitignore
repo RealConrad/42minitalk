@@ -1,6 +1,6 @@
 # Program names
-server
-client
+server_program
+client_program
 
 # Execuable
 a.out

@@ -6,13 +6,13 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 14:27:42 by cwenz             #+#    #+#              #
-#    Updated: 2023/08/11 18:27:32 by cwenz            ###   ########.fr        #
+#    Updated: 2023/08/11 19:00:16 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-CLIENT_NAME		:= client
-SERVER_NAME		:= server
+CLIENT_NAME		:= client_program
+SERVER_NAME		:= server_program
 
 # Compiler flags
 CC 				:= cc
