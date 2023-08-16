@@ -1,6 +1,7 @@
 # Program names
-server_program
-client_program
+server
+client
+.vscode
 
 # Execuable
 a.out
