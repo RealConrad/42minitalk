@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 14:27:42 by cwenz             #+#    #+#              #
-#    Updated: 2023/08/16 14:10:03 by cwenz            ###   ########.fr        #
+#    Updated: 2023/08/16 16:04:05 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ ERROR_DIR		:= ./src/error/
 UTILS_DIR		:= ./src/utils/
 
 # Source files
-CLIENT_FILES	:= client.c client_utils.c
+CLIENT_FILES	:= client.c
 SERVER_FILES	:= server.c
 ERROR_FILES		:= error.c
 UTIL_FILES		:= utils.c

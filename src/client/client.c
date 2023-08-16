@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:33:09 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/16 15:25:16 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/16 16:15:26 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 	setup_confirmation_from_server();
 	pid	= ft_atoi(argv[1]);
 	message_in_binary = convert_string_to_binary(argv[2]);
-	ft_printf("%s\n", message_in_binary);
 	while (message_in_binary[i])
 	{
 		send_bit_to_server(pid, message_in_binary[i]);
@@ -38,7 +37,6 @@ int	main(int argc, char **argv)
 	}
 	free(message_in_binary);
 	message_in_binary = NULL;
-	
 	return (SUCCESS);
 }
 
