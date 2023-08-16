@@ -6,17 +6,48 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:33:09 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/11 18:56:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/16 15:25:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*get_bits(char c)
+// 🙃
+
+static void	send_bit_to_server(pid_t pid, char bit);
+static char	*convert_string_to_binary(char *message);
+static char	*get_bits(char c);
+
+int	main(int argc, char **argv)
 {
-	static char	bits[9];
+	int		pid;
+	int		i;
+	char	*message_in_binary;
+
+	if (argc != 3)
+		error_and_exit(FAIL, "Invalid number of command line arguments.");
+	i = 0;
+	setup_confirmation_from_server();
+	pid	= ft_atoi(argv[1]);
+	message_in_binary = convert_string_to_binary(argv[2]);
+	ft_printf("%s\n", message_in_binary);
+	while (message_in_binary[i])
+	{
+		send_bit_to_server(pid, message_in_binary[i]);
+		i++;
+	}
+	free(message_in_binary);
+	message_in_binary = NULL;
+	
+	return (SUCCESS);
+}
+
+static char	*get_bits(char c)
+{
+	char	*bits;
 	int		i;
 
+	bits = ft_calloc(1, sizeof(char) * 9);
 	i = 0;
 	while (i < 8)
 	{
@@ -29,44 +60,34 @@ char	*get_bits(char c)
 	return (bits); 
 }
 
-char	*convert_string_to_binary(char *message)
+static char	*convert_string_to_binary(char *message)
 {
 	int		i;
 	int		length;
 	char	*result;
+	char	*bits;
 
 	i = 0;
-	length = ft_strlen(message);
-	result = ft_calloc(1, sizeof(char) * (length * 9));
+	length = ft_strlen(message) + 1;
+	result = ft_calloc(1, sizeof(char) * (length * 8));
 	if (!result)
 		error_and_exit(FAIL, "Failed to allocate memory.");
-	while (message[i])
+	while (i < length)
 	{
-		ft_strlcat(result, get_bits(message[i]), (i + 1) * 9);
+		bits = get_bits(message[i]);
+		ft_strlcat(result, bits, ((i + 1) * 8) + 1);
 		i++;
+		free(bits);
 	}
-	result[length * 9 - 1] = '\0';
 	return (result);
 }
 
-int	main(int argc, char **argv)
+static void	send_bit_to_server(pid_t pid, char bit)
 {
-	int		pid;
-	int		i;
-	char	*message_in_binary;
-	if (argc != 3)
-		error_and_exit(FAIL, "Invalid number of command line arguments.");
-	i = 0;
-	pid	= ft_atoi(argv[1]);
-	message_in_binary = convert_string_to_binary(argv[2]);
-	
-	while (message_in_binary[i])
-	{
-		if (message_in_binary[i] == '0')
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		i++;
-	}
-	return (SUCCESS);
+	if (bit == '0')
+		kill(pid, SIGUSR1);
+	else if (bit == '1')
+		kill(pid, SIGUSR2);
+	usleep(80);
 }
+

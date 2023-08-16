@@ -6,13 +6,13 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 14:27:42 by cwenz             #+#    #+#              #
-#    Updated: 2023/08/11 19:00:16 by cwenz            ###   ########.fr        #
+#    Updated: 2023/08/16 14:10:03 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-CLIENT_NAME		:= client_program
-SERVER_NAME		:= server_program
+CLIENT_NAME		:= client
+SERVER_NAME		:= server
 
 # Compiler flags
 CC 				:= cc
@@ -32,15 +32,19 @@ LIBFT_FCLEAN	:= make fclean -C $(LIBFT_PATH)
 CLIENT_DIR		:= ./src/client/
 SERVER_DIR		:= ./src/server/
 ERROR_DIR		:= ./src/error/
+UTILS_DIR		:= ./src/utils/
 
 # Source files
-CLIENT_FILES	:= client.c
+CLIENT_FILES	:= client.c client_utils.c
 SERVER_FILES	:= server.c
 ERROR_FILES		:= error.c
+UTIL_FILES		:= utils.c
 
 CLIENT_SRC		+= $(addprefix $(CLIENT_DIR), $(CLIENT_FILES))
 SERVER_SRC		+= $(addprefix $(SERVER_DIR), $(SERVER_FILES))
+
 SRC				+= $(addprefix $(ERROR_DIR), $(ERROR_FILES))
+SRC				+= $(addprefix $(UTILS_DIR), $(UTIL_FILES))
 
 # Object files
 CLIENT_OBJ		:= $(CLIENT_SRC:.c=.o)
@@ -71,7 +75,7 @@ init-submodule:
 	fi
 
 clean:
-	@$(RM) $(CLIENT_OBJ) $(SERVER_OBJ)
+	@$(RM) $(SRC_OBJ) $(CLIENT_OBJ) $(SERVER_OBJ)
 
 fclean: clean
 	@$(LIBFT_FCLEAN)
