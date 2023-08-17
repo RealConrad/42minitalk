@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:22:32 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/16 13:31:01 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/17 15:05:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ typedef struct s_signal_data {
 	char				byte;
 }	t_signal_data;
 
-t_signal_data	server_data;
+t_signal_data	g_server_data;
 
 /* Error */
 void	error_and_exit(t_error_type error_type, char *error_msg);
 
 /* Client */
-void	setup_confirmation_from_server();
+void	setup_confirmation_from_server(void);
 
 /* Utils */
 void	send_signal_back_to_client(siginfo_t *sig_info);
 
-# endif /* MINITALK_H */
+#endif /* MINITALK_H */
