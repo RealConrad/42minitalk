@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 14:27:42 by cwenz             #+#    #+#              #
-#    Updated: 2023/08/16 16:04:05 by cwenz            ###   ########.fr        #
+#    Updated: 2023/08/17 15:43:31 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,11 +59,11 @@ $(LIBFT):
 
 $(CLIENT_NAME): $(CLIENT_OBJ) $(SRC_OBJ)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(CLIENT_OBJ) $(SRC_OBJ) $(LIBFT) -o $(CLIENT_NAME)
-	@echo $(GREEN)"Linking $(CLIENT_NAME)"$(DEFAULT);
+	@echo $(GREEN)"MINITALK: Linking $(CLIENT_NAME)"$(DEFAULT);
 
 $(SERVER_NAME): $(SERVER_OBJ) $(SRC_OBJ)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(SERVER_OBJ) $(SRC_OBJ) $(LIBFT) -o $(SERVER_NAME)
-	@echo $(GREEN)"Linking $(SERVER_NAME)"$(DEFAULT);
+	@echo $(GREEN)"MINITALK: Linking $(SERVER_NAME)"$(DEFAULT);
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -80,6 +80,7 @@ clean:
 fclean: clean
 	@$(LIBFT_FCLEAN)
 	@$(RM) $(SERVER_NAME) $(CLIENT_NAME)
+	@echo $(RED)"MINITALK: Removing executables and objects"$(DEFAULT);
 
 re: fclean all
 
@@ -88,3 +89,4 @@ re: fclean all
 # Colours to make it look nice :)
 DEFAULT	= "\033[39m"
 GREEN	= "\033[32m"
+RED		= "\033[31m"
