@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:01:32 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/16 16:21:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/17 15:00:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	send_signal_back_to_client(siginfo_t *sig_info)
 	}
 }
 
-void	setup_confirmation_from_server()
+void	setup_confirmation_from_server(void)
 {
 	struct sigaction	client;
-	
+
 	client.sa_handler = print_acknowledgement;
 	client.sa_flags = 0;
 	sigaction(SIGUSR1, &client, NULL);
