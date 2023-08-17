@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:01:32 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/17 15:00:45 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/17 15:35:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	print_acknowledgement(int signo);
 
 void	send_signal_back_to_client(siginfo_t *sig_info)
 {
-	if (server_data.byte == '\0')
+	if (g_server_data.byte == '\0')
 	{
 		kill(sig_info->si_pid, SIGUSR1);
 		write(1, "\n", 1);
