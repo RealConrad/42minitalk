@@ -6,23 +6,24 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:29:38 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/17 15:04:56 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/19 15:11:42 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	handle_bit_0(int signo, siginfo_t *sig_info, void *context);
-static void	handle_bit_1(int signo, siginfo_t *sig_info, void *context);
+static void	handle_bit(int signo, siginfo_t *sig_info, void *context);
 static void	setup_signal_handler(struct sigaction *action, int signal_type);
+static bool	check_sender_pid_changed(siginfo_t *sig_info, char *byte);
 
 int	main(void)
 {
+	struct sigaction	sa0;
+	struct sigaction	sa1;
+
 	ft_printf("Server PID: %d\n", getpid());
-	g_server_data.byte = 0;
-	g_server_data.num_bits_received = 0;
-	setup_signal_handler(&g_server_data.sa0, SIGUSR1);
-	setup_signal_handler(&g_server_data.sa1, SIGUSR2);
+	setup_signal_handler(&sa0, SIGUSR1);
+	setup_signal_handler(&sa1, SIGUSR2);
 	while (1)
 		pause();
 	return (SUCCESS);
@@ -32,12 +33,12 @@ static void	setup_signal_handler(struct sigaction *action, int signal_type)
 {
 	if (signal_type == SIGUSR1)
 	{
-		action->sa_sigaction = handle_bit_0;
+		action->sa_sigaction = handle_bit;
 		sigaddset(&action->sa_mask, SIGUSR2);
 	}
 	else if (signal_type == SIGUSR2)
 	{
-		action->sa_sigaction = handle_bit_1;
+		action->sa_sigaction = handle_bit;
 		sigaddset(&action->sa_mask, SIGUSR1);
 	}
 	else
@@ -46,33 +47,32 @@ static void	setup_signal_handler(struct sigaction *action, int signal_type)
 	sigaction(signal_type, action, NULL);
 }
 
-static void	handle_bit_0(int signo, siginfo_t *sig_info, void *context)
+static void	handle_bit(int signo, siginfo_t *sig_info, void *context)
 {
+	static int	num_bits_received = 0;
+	char		byte;
+
+	if (check_sender_pid_changed(sig_info, &byte))
+		num_bits_received = 0;
+	byte <<= 1;
+	if (sig_info->si_signo == SIGUSR2)
+		byte |= 1;
+	num_bits_received++;
+	if (check_byte_printable(sig_info, &byte, num_bits_received))
+		num_bits_received = 0;
 	(void)signo;
 	(void)context;
-	g_server_data.byte <<= 1;
-	g_server_data.num_bits_received++;
-	if (g_server_data.num_bits_received == 8)
-	{
-		write(1, &g_server_data.byte, 1);
-		send_signal_back_to_client(sig_info);
-		g_server_data.num_bits_received = 0;
-		g_server_data.byte = 0;
-	}
 }
 
-static void	handle_bit_1(int signo, siginfo_t *sig_info, void *context)
+static bool	check_sender_pid_changed(siginfo_t *sig_info, char *byte)
 {
-	(void)signo;
-	(void)context;
-	g_server_data.byte <<= 1;
-	g_server_data.byte |= 1;
-	g_server_data.num_bits_received++;
-	if (g_server_data.num_bits_received == 8)
+	static int sender_pid = 0;
+
+	if (sender_pid != sig_info->si_pid)
 	{
-		write(1, &g_server_data.byte, 1);
-		send_signal_back_to_client(sig_info);
-		g_server_data.num_bits_received = 0;
-		g_server_data.byte = 0;
+		sender_pid = sig_info->si_pid;
+		*byte = 0;
+		return (true);
 	}
+	return (false);
 }

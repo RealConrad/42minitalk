@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 14:27:42 by cwenz             #+#    #+#              #
-#    Updated: 2023/08/17 15:43:31 by cwenz            ###   ########.fr        #
+#    Updated: 2023/08/19 14:22:55 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ UTILS_DIR		:= ./src/utils/
 CLIENT_FILES	:= client.c
 SERVER_FILES	:= server.c
 ERROR_FILES		:= error.c
-UTIL_FILES		:= utils.c
+UTIL_FILES		:= server_utils.c client_utils.c
 
 CLIENT_SRC		+= $(addprefix $(CLIENT_DIR), $(CLIENT_FILES))
 SERVER_SRC		+= $(addprefix $(SERVER_DIR), $(SERVER_FILES))
