@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:20:39 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/19 14:29:17 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/19 15:31:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ char	*convert_string_to_binary(char *message)
 	}
 	return (result);
 }
-

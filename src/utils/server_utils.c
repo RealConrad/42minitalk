@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:01:32 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/19 15:08:49 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/19 15:31:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ static void	send_signal_back_to_client(siginfo_t *sig_info, char byte)
 		write(1, "\n", 1);
 	}
 }
-

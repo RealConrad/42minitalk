@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:29:38 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/19 15:11:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/19 15:31:48 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	handle_bit(int signo, siginfo_t *sig_info, void *context)
 
 static bool	check_sender_pid_changed(siginfo_t *sig_info, char *byte)
 {
-	static int sender_pid = 0;
+	static int	sender_pid = 0;
 
 	if (sender_pid != sig_info->si_pid)
 	{
