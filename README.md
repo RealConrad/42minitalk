@@ -19,6 +19,7 @@
 - [Features](#features)
 - [How It Works](#how-it-works)
 - [Installation](#installation)
+- [Usage](#usage)
 - [License](#license)
 
 ## Features
@@ -50,7 +51,31 @@ cd 42minitalk
 make
 ```
 
+## Usage
+1. Open a terminal and start the server.
+```shell
+./server
+```
+2. Copy the PID displayed in the terminal. Once you have the server PID, you can now run the client:
+```shell
+./client [SERVER_PID] "Your message here"
+```
 
+#### Examples:
+1. Normal text:
+```shell
+./client [PID] "Hello World"
+```
+2. A large message:
+```shell
+./client [PID] "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi bibendum neque egestas congue. Fermentum iaculis eu non diam phasellus. Urna et pharetra pharetra massa massa ultricies mi quis hendrerit. Volutpat maecenas volutpat blandit aliquam etiam erat. Egestas congue quisque egestas diam in arcu cursus euismod. Et odio pellentesque diam volutpat. Id cursus metus aliquam eleifend mi in nulla posuere. Nulla facilisi nullam vehicula ipsum a arcu cursus. Bibendum est ultricies integer quis auctor elit sed vulputate mi."
+```
+
+3. Emoji's/Unicode characters
+```shell
+./client [PID] "😀 😃 😄 😁 😆 😅"
+./client [PID] "私は日本語を話しています!"
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
