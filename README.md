@@ -56,7 +56,7 @@ make
 ```shell
 ./server
 ```
-2. Copy the PID displayed in the terminal. Once you have the server PID, you can now run the client:
+2. Copy the PID displayed in the terminal. Once you have the server PID, you can now run the client (in another terminal):
 ```shell
 ./client [SERVER_PID] "Your message here"
 ```
