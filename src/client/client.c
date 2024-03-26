@@ -19,6 +19,7 @@ static void print_acknowledgement(int signo);
 
 int g_server_confirmation;
 
+
 int main(int argc, char **argv)
 {
 	int pid;
